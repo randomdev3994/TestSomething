@@ -1,6 +1,9 @@
-import fs from 'fs';
+/*import fs from 'fs';
 import path from 'path';
-import AdmZip from 'adm-zip';
+import AdmZip from 'adm-zip';*/
+const fs = require('fs');
+const path = require('path');
+const AdmZip = require('adm-zip');
 
 const zipFile = () => {
   const platform = process.env.CAPACITOR_PLATFORM_NAME;
