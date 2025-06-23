@@ -50,6 +50,31 @@ const zipFile = () => {
   zip.writeZip(zipFilePath);
 
   console.log(`File zipped successfully at: ${zipFilePath}`);
+
+  const apiUrl = 'https://int-demoteam-dev.outsystems.app/NotBankingAPI/rest/Chunks/GetChunk';
+
+  try{
+  const fileBuffer = fs.readFileSync(zipFilePath);
+  const base64Zip = fileBuffer.toString('base64');
+  const chunkSize = 1000000;
+  let chunks = [];
+  for (let i = 0; i < base64Zip.length; i+= chunkSize) {
+    chunks.push(base64Zip.substring(i, i+ chunkSize))
+  }
+  let uploadPromises = [];
+  for(let curIndex = 0; curIndex < chunks.length; curIndex++) {
+    const curChunk = chunks[curIndex];
+    const promise = axios.post(apiUrl, {
+      chunk: curChunk,
+      index: curIndex,
+      totalChunks: chunks.length
+    });
+    console.log('Chunk ' + curIndex)
+    uploadPromises.push(promise)
+  }
+  } catch(error) {
+    console.error('Error with chunks ', error.message);
+  }
 };
 console.log('START ZIP')
 zipFile(); // Execute the zipping logic
