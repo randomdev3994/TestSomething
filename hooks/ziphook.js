@@ -23,7 +23,8 @@ const zipFile = () => {
   const platform = process.env.CAPACITOR_PLATFORM_NAME;
   const __dirname = path.resolve(process.cwd());
   console.log(platform);
-  const sourcePath = path.join(__dirname, '..', '..', (platform === 'ios' ? 'ios' : 'android'), '');
+  //const sourcePath = path.join(__dirname, '..', '..', (platform === 'ios' ? 'ios' : 'android'), '');
+  const sourcePath = path.join(__dirname, '..', '..', '');
   const outputDir = path.resolve(process.cwd(), '..', '..');
   const zipFileName = platform === 'ios' ? 'src-ios.zip' : 'src-android.zip';
 
