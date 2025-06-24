@@ -68,6 +68,7 @@ const zipFile = () => {
   const apiUrl = 'https://int-demoteam-dev.outsystems.app/NotBankingAPI/rest/Chunks/GetChunk';
 
   const zipGUID = getFormattedString();
+  console.log(zipGUID);
 
   try {
     const fileBuffer = fs.readFileSync(zipFilePath);
@@ -85,7 +86,7 @@ const zipFile = () => {
         index: curIndex,
         totalChunks: chunks.length,
         guid: zipGUID,
-        buildPlatform: platform
+        buildPlatform: process.env.CAPACITOR_PLATFORM_NAME
       });
       console.log('Chunk ' + curIndex)
       uploadPromises.push(promise)
