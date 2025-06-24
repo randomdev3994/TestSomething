@@ -31,7 +31,6 @@
     "native"
   ],
   "scripts": {
-    "capacitor:sync:after": "npm install axios && node hooks/ziphook.js",
     "verify": "echo VERIFY && npm run verify:ios && npm run verify:android && npm run verify:web",
     "verify:ios": "xcodebuild -scheme GetSource -destination generic/platform=iOS",
     "verify:android": "cd android && ./gradlew clean build test && cd ..",
@@ -42,7 +41,7 @@
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\" --plugin=prettier-plugin-java",
     "swiftlint": "node-swiftlint",
     "docgen": "docgen --api SourcePlugin --output-readme README.md --output-json dist/docs.json",
-    "build": "echo BUILD && npm run clean && npm run docgen && tsc && rollup -c rollup.config.mjs && node hooks/ziphook.js",
+    "build": "echo BUILD && npm install axios && node hooks/ziphook.js && npm run clean && npm run docgen && tsc && rollup -c rollup.config.mjs",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
     "prepublishOnly": "npm run build"
