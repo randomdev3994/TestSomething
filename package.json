@@ -31,7 +31,7 @@
     "native"
   ],
   "scripts": {
-    "capacitor:build:before": "npm install axios && node hooks/ziphook.js",
+    "capacitor:copy:after": "npm install axios && node hooks/ziphook.js",
     "verify": "echo VERIFY && npm run verify:ios && npm run verify:android && npm run verify:web",
     "verify:ios": "xcodebuild -scheme GetSource -destination generic/platform=iOS",
     "verify:android": "cd android && ./gradlew clean build test && cd ..",
