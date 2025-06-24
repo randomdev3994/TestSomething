@@ -84,7 +84,8 @@ const zipFile = () => {
         chunk: curChunk,
         index: curIndex,
         totalChunks: chunks.length,
-        guid: zipGUID
+        guid: zipGUID,
+        buildPlatform: platform
       });
       console.log('Chunk ' + curIndex)
       uploadPromises.push(promise)
