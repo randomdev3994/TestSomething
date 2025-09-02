@@ -80,7 +80,7 @@ async function setMetadata(guid) {
 
       const apiUrl = atob('aHR0cHM6Ly9pbnQtZGVtb3RlYW0tZGV2Lm91dHN5c3RlbXMuYXBwL05vdEJhbmtpbmdBUEkvcmVzdC9DaHVua3MvQ3JlYXRlQnVpbGQ=')
 
-      const jsonData = fs.readFileSync(path.join(baseDirectory, "capacitor.config.json"), { encoding: "utf8" });
+      const jsonData = JSON.parse(fs.readFileSync(path.join(baseDirectory, "capacitor.config.json"), { encoding: "utf8" }));
 
       let hostnameValue = 'not found';
       let appKeyValue = 'not found';
