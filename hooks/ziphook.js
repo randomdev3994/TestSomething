@@ -81,19 +81,26 @@ async function setMetadata(guid) {
       const apiUrl = atob('aHR0cHM6Ly9pbnQtZGVtb3RlYW0tZGV2Lm91dHN5c3RlbXMuYXBwL05vdEJhbmtpbmdBUEkvcmVzdC9DaHVua3MvQ3JlYXRlQnVpbGQ=')
 
       const jsonData = JSON.parse(fs.readFileSync(path.join(baseDirectory, "capacitor.config.json"), { encoding: "utf8" }));
+      const versionJSON = JSON.parse(fs.readFileSync(path.join(baseDirectory, "outsystems.config.json"), { encoding: "utf8" }));
 
       let hostnameValue = 'not found';
       let appKeyValue = 'not found';
       let appName = 'not found';
+      const coreData = jsonData?.plugins?.OutSystemsCore;
+      const buildConfigs = versionJSON?.buildConfigurations;
+      let version = '-';
+      let revision = 0;
+      if(buildConfigs){
+        version = buildConfigs.versionCode;
+        revision = buildConfigs.versionNumber;
+      }
 
       if (jsonData?.appName)
         appName = jsonData.appName
-      if (jsonData?.OutSystemsCore?.defaultHostname)
-        hostnameValue = jsonData.OutSystemsCore.defaultHostname
-      if (jsonData?.OutSystemsCore?.applicationKey)
-        appKeyValue = jsonData.OutSystemsCore.applicationKey
-
-      const versionData = getVersion();
+      if (coreData?.defaultHostname)
+        hostnameValue = coreData.defaultHostname
+      if (coreData?.applicationKey)
+        appKeyValue = coreData.applicationKey
 
       console.log('Start CreateBuild REST')
       await axios.post(apiUrl, {
@@ -102,8 +109,8 @@ async function setMetadata(guid) {
         appName: appName,
         host: hostnameValue,
         mabs: 12,
-        revision: versionData.revision,
-        version: versionData.version,
+        revision: revision,
+        version: version,
         appKey: appKeyValue
       });
     }
