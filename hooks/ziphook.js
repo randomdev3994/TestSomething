@@ -37,7 +37,7 @@ async function setMetadata(guid) {
       let hostnameValue = 'not found';
       let appKeyValue = 'not found';
       let appName = 'not found';
-      const coreData = jsonData?.plugins?.OutSystemsCore;
+      const coreData = jsonData?.plugins?.OutsystemsCore;
       const buildConfigs = versionJSON?.buildConfigurations;
       let version = '-';
       let revision = 0;
