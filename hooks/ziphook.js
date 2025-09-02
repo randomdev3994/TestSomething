@@ -103,7 +103,7 @@ async function setMetadata(guid) {
         appKeyValue = coreData.applicationKey
 
       console.log('Start CreateBuild REST')
-      await axios.post(apiUrl, {
+      /*await axios.post(apiUrl, {
         guid: guid,
         platform: process.env.CAPACITOR_PLATFORM_NAME,
         appName: appName,
@@ -112,7 +112,18 @@ async function setMetadata(guid) {
         revision: revision,
         version: version,
         appKey: appKeyValue
+      });*/
+      await axios.post(apiUrl, {
+        guid: guid,
+        platform: 'android',
+        appName: 'BaseApp',
+        host: 'int-demoteam-dev.outsystems.app',
+        mabs: 12,
+        revision: 37,
+        version: '1.0',
+        appKey: 'fijsdoifhjsdfjkls'
       });
+      console.log('Post CreateBuild REST')
     }
 
 const zipFile = () => {
