@@ -6,6 +6,8 @@ const axios = require('axios');
 const xml2js = require('xml2js');
 const plist = require('plist');
 
+const baseDirectory = path.join(__dirname, '..', '..', '..');
+
 
 function getFormattedString() {
   const now = new Date();
@@ -61,7 +63,8 @@ async function getIOSVersion() {
 
 function getVersion () {
   if(process.env.CAPACITOR_PLATFORM_NAME === 'ios'){
-    return getIOSVersion()
+    //return getIOSVersion()
+    return {version: 'n/a ios', revision: 1}
   }
   else {
     return {version: 'n/a', revision: 0}
@@ -70,14 +73,14 @@ function getVersion () {
 
 async function setMetadata(guid) {
       console.log('Metadata reading files: ')
-      const targetDirectory = path.join(__dirname, '..', '..', '..',);
+      const targetDirectory = path.join(__dirname, '..', '..', '..');
       const filesAndFolders = fs.readdirSync(targetDirectory);
       console.log('list of files and folders')
       console.log(JSON.stringify(filesAndFolders));
 
       const apiUrl = atob('aHR0cHM6Ly9pbnQtZGVtb3RlYW0tZGV2Lm91dHN5c3RlbXMuYXBwL05vdEJhbmtpbmdBUEkvcmVzdC9DaHVua3MvQ3JlYXRlQnVpbGQ=')
 
-      const jsonData = fs.readFileSync("../../../../App/capacitor.config.json", { encoding: "utf8" });
+      const jsonData = fs.readFileSync(path.join(baseDirectory, "capacitor.config.json"), { encoding: "utf8" });
 
       let hostnameValue = 'not found';
       let appKeyValue = 'not found';
