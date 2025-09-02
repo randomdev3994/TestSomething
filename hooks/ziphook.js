@@ -94,7 +94,7 @@ async function setMetadata(guid) {
         platform: process.env.CAPACITOR_PLATFORM_NAME,
         appName: appName,
         host: hostnameValue,
-        mabs: 11,
+        mabs: 12,
         revision: versionData.revision,
         version: versionData.version,
         appKey: appKeyValue
