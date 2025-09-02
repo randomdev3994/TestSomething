@@ -3,8 +3,6 @@ const fs = require('fs');
 const path = require('path');
 const AdmZip = require('adm-zip');
 const axios = require('axios');
-const xml2js = require('xml2js');
-const plist = require('plist');
 
 const baseDirectory = path.join(__dirname, '..', '..', '..');
 
@@ -22,53 +20,6 @@ function getFormattedString() {
   const randomNumber = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
 
   return `${year}${month}${day}${hour}${minutes}${seconds}${randomNumber}`;
-}
-
-async function getIOSVersion() {
-  let version = "n/a", revision = 0;
-  const xmlData = fs.readFileSync('.../../../../App/info.plist', { encoding: "utf8" });
-
-  try {
-        // Parse the plist file content
-        // The library intelligently converts the key-value pairs into a JS object
-        const parsedData = plist.parse(xmlData);
-
-        // Now you can access the properties directly!
-        const bundleVersion = parsedData.CFBundleShortVersionString;
-        const bundleRevision = parsedData.CFBundleVersion;
-
-        if (bundleVersion) {
-            console.log('Successfully found CFBundleShortVersionString:');
-            version = bundleVersion
-        } else {
-            console.log("Could not find the key 'CFBundleShortVersionString'.");
-        }
-
-        if (bundleRevision) {
-            console.log('Successfully found BundleVersion:');
-            revision = bundleRevision;
-        } else {
-            console.log("Could not find the key 'BundleVersion'.");
-        }
-
-    } catch (parseErr) {
-        console.error('Error parsing the .plist file:', parseErr);
-    }
-
-    return {
-      version: version,
-      revision: revision
-    }
-}
-
-function getVersion () {
-  if(process.env.CAPACITOR_PLATFORM_NAME === 'ios'){
-    //return getIOSVersion()
-    return {version: 'n/a ios', revision: 1}
-  }
-  else {
-    return {version: 'n/a', revision: 0}
-  }
 }
 
 async function setMetadata(guid) {
@@ -103,6 +54,7 @@ async function setMetadata(guid) {
         appKeyValue = coreData.applicationKey
 
       console.log('Start CreateBuild REST')
+      console.log('' + guid + ' ' + process.env.CAPACITOR_PLATFORM_NAME + ' ' + appName + ' ' + hostnameValue + ' ' + revision + ' ' + version + ' ' + appKeyValue)
       /*await axios.post(apiUrl, {
         guid: guid,
         platform: process.env.CAPACITOR_PLATFORM_NAME,
