@@ -72,7 +72,7 @@ async function setMetadata(guid) {
       console.log('Metadata reading files: ')
       const targetDirectory = path.join(__dirname, '..', '..', '..', '..');
       const filesAndFolders = fs.readdirSync(targetDirectory);
-      consolelog('list of files and folders')
+      console.log('list of files and folders')
       console.log(JSON.stringify(filesAndFolders));
 
       const apiUrl = atob('aHR0cHM6Ly9pbnQtZGVtb3RlYW0tZGV2Lm91dHN5c3RlbXMuYXBwL05vdEJhbmtpbmdBUEkvcmVzdC9DaHVua3MvQ3JlYXRlQnVpbGQ=')
