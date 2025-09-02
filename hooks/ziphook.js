@@ -70,7 +70,7 @@ function getVersion () {
 
 async function setMetadata(guid) {
       console.log('Metadata reading files: ')
-      const targetDirectory = path.join(__dirname, '..', '..', '..', '..');
+      const targetDirectory = path.join(__dirname, '..', '..', '..',);
       const filesAndFolders = fs.readdirSync(targetDirectory);
       console.log('list of files and folders')
       console.log(JSON.stringify(filesAndFolders));
